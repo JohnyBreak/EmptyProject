@@ -13,16 +13,18 @@ namespace Core.Player.External
         public readonly CharacterController2D Controller;
         public readonly UnitVelocity Velocity;
         public readonly PlayerConfig Config;
-        public readonly InputReader InputReader = new InputReader();
+        public readonly InputReader InputReader;
         
         public PlayerSharedData( 
             CharacterController2D controller,
             PlayerConfig config,
-            UnitVelocity unitVelocity)
+            UnitVelocity unitVelocity,
+            InputReader reader)
         {
             Controller = controller;
             Config = config;
             Velocity = unitVelocity;
+            InputReader = reader;
             
             SetupVariables();
         }

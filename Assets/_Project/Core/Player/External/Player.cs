@@ -1,6 +1,7 @@
 using Common.UnitStateMachine.Runtime;
 using Common.UnitStateMachine.Runtime.PlayerStates;
 using Common.UnitVelocity;
+using Core.InputSystem;
 using UnityEngine;
 
 namespace Core.Player.External
@@ -8,6 +9,7 @@ namespace Core.Player.External
     public class Player : MonoBehaviour
     {
         [SerializeField] private CharacterController2D _controller;
+        private InputReader _inputReader;
         
         private StateMachine _stateMachine;
         private StateFactory _stateFactory;
@@ -19,8 +21,15 @@ namespace Core.Player.External
         {
             _stateMachine = new StateMachine();
             _stateFactory = new StateFactory();
-
-            _sharedData = new PlayerSharedData(_controller, _config, _velocity);
+            _inputReader = new InputReader();
+            
+            _inputReader.Enable();
+            
+            _sharedData = new PlayerSharedData(
+                _controller,
+                _config,
+                _velocity,
+                _inputReader);
             
             GroundedState grounded = new GroundedState(
                 _stateMachine,
@@ -60,11 +69,9 @@ namespace Core.Player.External
             _stateMachine.SetState(grounded);
             _stateMachine.Start();
         }
-        
+
         private void Update()
         {
-            _sharedData.InputReader.Tick();
-            
             _stateMachine.Tick();
             _controller.Move(_velocity.GetVelocity());
             //Debug.Log(_velocity.GetVelocity());
@@ -72,6 +79,7 @@ namespace Core.Player.External
         
         private void OnDestroy()
         {
+            _inputReader?.Disable();
             _stateFactory?.Dispose();
         }
     }
