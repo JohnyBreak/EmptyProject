@@ -1,0 +1,8 @@
+Key,EN,RU
+BlockPickedUpText,Block picked up!,Блок поднят!
+BlockDestroyedText,Block destroyed!,Блок уничтожен!
+BlockTrashedText,Block thrown in trash!,Блок выброшен в мусор!
+BlockPlacedText,Block placed in tower!,Блок размещён в башне!
+BlockRemovedText,Block removed from tower!,Блок убран из башни!
+NoMoreSpaceText,No more space!,Нет места!
+StartGameText,Start Game,Начать игру
