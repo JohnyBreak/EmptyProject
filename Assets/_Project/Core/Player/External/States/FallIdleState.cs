@@ -1,20 +1,22 @@
+using Core.Player.External;
+
 namespace Common.UnitStateMachine.Runtime.PlayerStates
 {
-    public class IdleState : BaseState
+    public class FallIdleState: BaseState
     {
-        private readonly ISharedData _sharedData;
+        private readonly PlayerSharedData _sharedData;
 
-        public IdleState(
+        public FallIdleState(
             StateMachine currentContext, 
             StateFactory unitStateFactory,
             ISharedData sharedData) : base(currentContext, unitStateFactory)
         {
-            _sharedData = sharedData;
+            _sharedData = (PlayerSharedData)sharedData;
         }
 
         public override int Key()
         {
-            return States.Idle;
+            return States.FallIdle;
         }
 
         protected override void OnEnterState()
@@ -31,7 +33,10 @@ namespace Common.UnitStateMachine.Runtime.PlayerStates
 
         protected override void CheckSwitchState()
         {
-            
+            if (_sharedData.InputReader.MovementInputDetected)
+            {
+                SwitchState(_factory.Get(States.FallMove));
+            }
         }
 
         protected override void InitializeSubState()

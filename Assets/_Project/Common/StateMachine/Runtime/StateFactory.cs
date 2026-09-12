@@ -8,7 +8,7 @@ namespace Common.UnitStateMachine.Runtime
         public const int Idle = 0;
         public const int Move = 1;
         public const int Grounded = 2;
-        public const int Air = 3;
+        public const int Fall = 3;
         public const int FallIdle = 4;
         public const int FallMove = 5;
         public const int Jump = 6;
