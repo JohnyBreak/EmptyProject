@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AttacksConfig
+  m_EditorClassIdentifier: Assembly-CSharp:Core.CombatSystem:AttacksConfig
+  Attacks:
+  - Name: Attack1
+    AnimationName: Attack1
+    Duration: 0.43
+    BaseDamage: 0
+    NextInputWindowStart: 0.2
+    NextAttackTransitionStart: 0.8
+    IdleTransitionStart: 0.95
+    XMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    YMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    HitBoxSettings: []
+  - Name: Attack2
+    AnimationName: Attack2
+    Duration: 0.43
+    BaseDamage: 0
+    NextInputWindowStart: 0.5
+    NextAttackTransitionStart: 0.8
+    IdleTransitionStart: 0.95
+    XMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    YMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    HitBoxSettings: []
+  - Name: Attack3
+    AnimationName: Attack3
+    Duration: 0.571
+    BaseDamage: 0
+    NextInputWindowStart: 0.2
+    NextAttackTransitionStart: 0.8
+    IdleTransitionStart: 0.95
+    XMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    YMovementSettings:
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DistanceMultiplier: 0
+      StartTime: 0
+      Duration: 0
+      IsEmpty: 1
+    HitBoxSettings: []
