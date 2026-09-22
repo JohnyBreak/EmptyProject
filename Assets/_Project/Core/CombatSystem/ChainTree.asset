@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Core.CombatSystem:ChainTree
   Chains:
   - FromAttackName: Attack1
-    InputType: 0
+    InputType: 1
     ToAttackName: Attack2
-  - FromAttackName: Attack1
+  - FromAttackName: Attack2
     InputType: 1
     ToAttackName: Attack3

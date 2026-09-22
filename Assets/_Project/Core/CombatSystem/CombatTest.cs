@@ -122,7 +122,7 @@ namespace Core.CombatSystem
     }
     
     [Serializable]
-    public class Chain
+    public class AttackTransitionEdge
     {
         public string FromAttackName;
         public AttackInputType InputType;
@@ -132,7 +132,37 @@ namespace Core.CombatSystem
     [CreateAssetMenu(fileName = "ChainTree", menuName = "CombatSystem/ChainTree")]
     public class ChainTree : ScriptableObject
     {
-        public List<Chain> Chains;
+        public List<AttackTransitionEdge> Edges;
+    }
+
+    public sealed class AttackTransition
+    {
+        private readonly Dictionary<(string, AttackInputType), Attack> _map = new Dictionary<(string, AttackInputType), Attack>();
+
+        public AttackTransition(
+            Dictionary<string, Attack> attacks,
+            List<AttackTransitionEdge> edges)
+        {
+            foreach (var edge in edges)
+            {
+                if (!attacks.TryGetValue(edge.ToAttackName, out var value))
+                {
+                    throw new KeyNotFoundException($"Unknown next attack: {edge.ToAttackName}");
+                }
+
+                var key = (edge.FromAttackName, edge.InputType);
+
+                if (!_map.TryAdd(key, value))
+                {
+                    throw new InvalidOperationException($"Duplicate edge: {key}");
+                }
+            }
+        }
+        
+        public bool TryGetNext(string currentAttackName, AttackInputType input, out Attack next)
+        {
+            return _map.TryGetValue((currentAttackName, input), out next);
+        } 
     }
 
     public class CombatSystem
@@ -291,6 +321,30 @@ namespace Core.CombatSystem
             _combatSystem.ProcessAttack(input);
         }
 
+        /*
+         атака это не просто класс, это интерфейс ICombatAction
+         так мы можем добавить другие действия типа парирования уклонения спец приема через зажатие нескольких кнопок 
+         или оперделенных боевых ситуаций типа супер добивания оглушенного враза при нажатии 2 кнопок
+         */
+        /*
+         инпут тайп заменить на триггер, напрмиер
+         public readonly struct CombatTrigger
+        {
+            public CombatTriggerKind Kind { get; }
+            public int Param { get; } // SkillId, Direction (8-way dodge), etc.
+            public static CombatTrigger LightTap() => new(CombatTriggerKind.LightTap);
+            public static CombatTrigger Dodge(int dir) => new(CombatTriggerKind.Dodge, dir);
+            public static CombatTrigger Skill(int id) => new(CombatTriggerKind.Skill, id);
+        }
+         */
+        
+        /*
+         добавить тэги чтобы понимать кто что и почему
+         [Flags]
+        public enum CombatActionTags : ushort
+         
+         */
+        
         /*
 атака как объект
 атака создается, конфигурируется и записывается в мапу по имени
